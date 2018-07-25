@@ -3,10 +3,9 @@
 To get list of all the stores of particular category this component is useful. For ex, suppose photo studio association needs to show list of all the studios around the world, which comes under their association, they can add/edit stores by admin view of the portal and end-user can see list of the studios and also they can filter nearer studios based on their current location.
 
 ## Store locator component has below capabilities.
-*	it can add/edit stores
-*	it can filter stores by admin using advance search option of liferay
-*	it is featured with google maps to empower visualization of the location of the stores
-*	it can filter based on distance - Miles/Kilometers
+*	Add/edit stores
+*	Featured with google maps to empower visualization of the location of the stores
+*	Filter based on distance - Miles/Kilometers powered by ElasticSearch
 
 ## Environment
 
