@@ -23,6 +23,9 @@
 		</aui:form>
 	</c:if>
 	<div class="clearfix"></div>
+	<c:if test="${empty googleAPIKey}">
+		<p class="pull-right"><font color="red" ><liferay-ui:message key="add-google-api-key-message" /></font></p>
+	</c:if>
 	<div class="container">
 		<div id="noRecords" style="display:none"><liferay-ui:message key="no-records-found" /></div>
 		<div class="row"><label id="noOfRecords"> </label> </div>
@@ -32,5 +35,7 @@
 	<div id="map"></div>
 </div>
 <%@ include file="storeView_js.jsp" %>
-<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=${googleAPIKey}&callback=initMap"></script>
+<c:if test="${not empty googleAPIKey}">
+	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=${googleAPIKey}&callback=initMap"></script>
+</c:if>

@@ -26,8 +26,10 @@
 	</div>
 	
 	<c:if test = "${empty viewDetail}">
-		<div class="form-group area_field">
-			<!-- <label for="storeArea"><liferay-ui:message key="area" /></label> -->
+		<div class="form-group area_field">			
+			<c:if test="${empty googleAPIKey}">
+				<p class="pull-right"><font color="red" ><liferay-ui:message key="add-google-api-key-message" /></font></p>
+			</c:if>
 			<aui:input label="Area" type="text" Stclass="form-control" name="storeArea" value="" helpMessage="areaToolTip">
 			</aui:input>
 		</div>
