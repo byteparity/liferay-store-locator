@@ -1,6 +1,8 @@
 # Liferay Store Locator
 
-To get list of all the stores of particular category this component is useful. For ex, suppose photo studio association needs to show list of all the studios around the world, which comes under their association, they can add/edit stores by admin view of the portal and end-user can see list of the studios and also they can filter nearer studios based on their current location.
+A simple store locator to showcase the stores stored in back end into a google map location view. A distance based filter helps user to find the store within given distance. It requires geo location fields to be entered via backend. 
+
+A common usecase: Photo studio association or company needs to show list of all the studios around the world, which comes under their association, they can add/edit stores by admin view of the portal and end-user can see list of the studios and also they can filter nearer studios based on their current location.
 
 ## Store locator component has below capabilities.
 *	Add/edit stores
