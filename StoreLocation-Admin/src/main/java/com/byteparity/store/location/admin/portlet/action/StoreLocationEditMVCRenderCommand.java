@@ -44,7 +44,7 @@ public class StoreLocationEditMVCRenderCommand implements MVCRenderCommand{
 		renderRequest.setAttribute("store", storeInformation);
 		
 		PortletPreferences portletPreferences = renderRequest.getPreferences();
-		String googleAPIKey = portletPreferences.getValue("googleAPIKey", "AIzaSyCVcw950Oq0RCthjjycKqcK0NpoII-6QzU");
+		String googleAPIKey = portletPreferences.getValue("googleAPIKey", StringPool.BLANK);
 		renderRequest.setAttribute("googleAPIKey", googleAPIKey);
 		
 		return "/editStore.jsp";
