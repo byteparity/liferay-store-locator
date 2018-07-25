@@ -24,7 +24,7 @@ public class StoreLocatorViewLocationsMVCRenderCommand  implements MVCRenderComm
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
 
 		PortletPreferences portletPreferences = renderRequest.getPreferences();
-		String googleAPIKey = portletPreferences.getValue("googleAPIKey", "AIzaSyCVcw950Oq0RCthjjycKqcK0NpoII-6QzU");
+		String googleAPIKey = portletPreferences.getValue("googleAPIKey", StringPool.BLANK);
 		renderRequest.setAttribute("googleAPIKey", googleAPIKey);
 		
 		String enableSearchFilter = portletPreferences.getValue("enableSearchFilter", "false");
