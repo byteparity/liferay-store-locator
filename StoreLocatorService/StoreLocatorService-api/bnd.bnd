@@ -1,0 +1,9 @@
+Bundle-Name: StoreLocatorService-api
+Bundle-SymbolicName: com.byteparity.portal.portlet.storelocator.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.byteparity.portal.portlet.storelocator.exception,\
+	com.byteparity.portal.portlet.storelocator.model,\
+	com.byteparity.portal.portlet.storelocator.service,\
+	com.byteparity.portal.portlet.storelocator.service.persistence
+-includeresource: META-INF/service.xml=../StoreLocatorService-service/service.xml
