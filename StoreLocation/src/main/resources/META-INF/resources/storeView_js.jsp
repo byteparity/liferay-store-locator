@@ -2,10 +2,9 @@
 
 <script type="text/javascript">
 
-var lat = '', lng = '' ;
+var lat = Number(0.0); var lng = Number(0.0) ;
 
 $( document ).ready(function() {
-    console.log( "Ready Location !!" );
     setTimeout(function() {
     	<portlet:namespace/>getLocationLatLng();
 	}, 1000)
@@ -15,9 +14,6 @@ $( document ).ready(function() {
 });
 
 function <portlet:namespace/>getLocationLatLng(){
-	lat = getCookie("currentLocationLat");
-	lng = getCookie("currentLocationLng");
-	if(lat === null && lng === null){
 		if (navigator.geolocation){				
 				console.log('window.navigator.geolocation : '+window.navigator.geolocation);
 				window.navigator.geolocation.getCurrentPosition(userLocationFound, userLocationNotFound, geoOptions);
@@ -25,7 +21,6 @@ function <portlet:namespace/>getLocationLatLng(){
 	    	viewSearchResultServices
 			alert("Geolocation is not supported by this browser.");
 		}	
-	 } 
 }
 
 
@@ -37,69 +32,28 @@ geoOptions = {
 };
 
 var userLocationFound = function(position){
-latLng = {
-    lat: position.coords.latitude,
-    lng: position.coords.longitude
-};
-
-
-var latlng = null;
-var lat = null;
-var lng = null;
-var locationText = null;
-lat = parseFloat(latLng.lat);
-lng = parseFloat(latLng.lng);
-
-document.cookie="currentLocationLat=" + lat;
-document.cookie="currentLocationLng=" + lng;
-
-
-var latlng = new google.maps.LatLng(lat, lng);
-var geocoder = geocoder = new google.maps.Geocoder();
-
-geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-	if (status == google.maps.GeocoderStatus.OK) {
-		if (results[1]) {
-			document.cookie="locationText=" + results[1].formatted_address;			
-		}
-	}
-});
+	latLng = {
+	    lat: position.coords.latitude,
+	    lng: position.coords.longitude
+	};
+	
+	var latlng = null;
+	lat = parseFloat(latLng.lat);
+	lng = parseFloat(latLng.lng);
 }
 
 var userLocationNotFound = function(){    
 
 var lats='';
 var lngs='';
-var locationText = '';
 $.get("http://ipinfo.io", function (response)
 {
     lats = response.loc.split(',')[0]; 
     lngs = response.loc.split(',')[1];
     
-    var lat = parseFloat(lats);
-    var lng = parseFloat(lngs);
-       
-    var cookieLat = '', cookieLng = '' ;
-    cookieLat = getCookie("currentLocationLat");
-    cookieLng = getCookie("currentLocationLng");
-    if(cookieLat === null && cookieLng === null){
-	 	document.cookie="currentLocationLat=" + lat;
-	    document.cookie="currentLocationLng=" + lng;
-    }
-    
-    var latlng = new google.maps.LatLng(lat, lng);
-    var geocoder = geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            if (results[1]) {
-            	var cookieLocationText = '';
-            	cookieLocationText = getCookie("locationText");
-            	if(cookieLocationText === null){
-            		document.cookie="locationText=" + results[1].formatted_address;
-            	}
-            }
-        }
-    });
+    lat = parseFloat(lats);
+    lng = parseFloat(lngs);
+           
 }, "jsonp");
 }
 
@@ -113,12 +67,6 @@ if(!latLng){
 }
 }, geoOptions.timeout + 1000); // Wait extra second
 
-function getCookie(name){
-  var re = new RegExp(name + "=([^;]+)");
-  var value = re.exec(document.cookie);
-  return (value != null) ? unescape(value[1]) : null;
-}
-
 function <portlet:namespace />getNearbyStoreLocation(){
 	var unit = $("#<portlet:namespace />distanceUnit option:selected").val();
 	var distance = $("#<portlet:namespace />distance").val();
@@ -126,7 +74,7 @@ function <portlet:namespace />getNearbyStoreLocation(){
 }
 
 function <portlet:namespace/>getNearbyStores(lat, lng, unit, distance){
-
+    
 	$.ajax({
 	    url :"<%=getNearbyStoreInformationURL%>",
 	    data:{
@@ -216,10 +164,7 @@ function resultAppear(latitude, longitude, searchLocationResult){
 
 function initMap(latitude, longitude, searchLocationResult, locations) {
 
-	if(latitude === 0 && longitude === 0){
-		console.log('lat and long is 0');
-		console.log('Latitude :: '+locations[0].lat);
-		console.log('Longitude :: '+locations[0].lng);
+	if(latitude === 0 && longitude === 0){		
 		latitude = locations[0].lat;
 		longitude = locations[0].lng;
 	}
@@ -235,10 +180,6 @@ function initMap(latitude, longitude, searchLocationResult, locations) {
 
     // Create an array of alphabetical characters used to label the markers.
     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    
-    /* $.each(locations, function (index, value) {
-	    console.log('Latitude => '+ value.lat + ' Longitude => ' + value.lng);
-	}); */ 
     
     var infowindow = new google.maps.InfoWindow();
 	var marker, i;

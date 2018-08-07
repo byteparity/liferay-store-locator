@@ -4,20 +4,29 @@ import java.util.Date;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletRequest;
 
 import org.osgi.service.component.annotations.Component;
 
 import com.byteparity.portal.portlet.storelocator.model.StoreInformation;
 import com.byteparity.portal.portlet.storelocator.service.StoreInformationLocalServiceUtil;
+import com.byteparity.store.location.admin.portlet.exception.StoreLocationEmptyFieldException;
+import com.byteparity.store.location.admin.portlet.exception.StoreLocationExcessFieldLimitSizeException;
+import com.byteparity.store.location.admin.portlet.exception.StoreLocationNonStringException;
 import com.byteparity.store.location.admin.portlet.portlet.StoreLocationAdminPortlet;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -75,12 +84,19 @@ public class StoreLocationAddMVCActionCommand extends BaseMVCActionCommand{
 		storeInformation.setCompanyId(companyId);
 		storeInformation.setModifiedDate(new Date());
 		
-		if(storeInformation.isNew()){
-			StoreInformationLocalServiceUtil.addStoreInformation(storeInformation);
-		}else{
-			StoreInformationLocalServiceUtil.updateStoreInformation(storeInformation);
+		try {
+			storeInformationValidator(actionRequest, storeInformation);
+			if(storeInformation.isNew()){
+				StoreInformationLocalServiceUtil.addStoreInformation(storeInformation);
+			}else{
+				StoreInformationLocalServiceUtil.updateStoreInformation(storeInformation);
+			}
+			reindex(StoreInformation.class.getName(), storeInformation);
+
+		}catch(StoreLocationEmptyFieldException | StoreLocationNonStringException | StoreLocationExcessFieldLimitSizeException sefEx) {
+			SessionMessages.add(actionRequest, PortalUtil.getPortletId(actionRequest) + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
+			_log.error(sefEx.getMessage(), sefEx);
 		}
-		reindex(StoreInformation.class.getName(), storeInformation);
 	}
 	
 	public static void reindex(String className, Object object) throws SearchException{
@@ -92,4 +108,42 @@ public class StoreLocationAddMVCActionCommand extends BaseMVCActionCommand{
 			e.printStackTrace();
 		}
 	}
+	
+	public static void storeInformationValidator(PortletRequest request, StoreInformation storeInformation) throws Exception{
+		
+		if(Validator.isNull(storeInformation.getStoreName()) || Validator.isNull(storeInformation.getAddress1())
+	|| Validator.isNull(storeInformation.getCity()) || Validator.isNull(storeInformation.getState())
+	|| Validator.isNull(storeInformation.getCountry()) || Validator.isNull(storeInformation.getZip())
+	|| Validator.isNull(storeInformation.getPhone()) || Validator.isNull(storeInformation.getLatitude()) || Validator.isNull(storeInformation.getLongitude())){
+			SessionErrors.add(request, "storeInformationValidationError");
+			throw new StoreLocationEmptyFieldException("StoreInformation cannot be empty. Please fill required information.");
+		}
+		
+		if((Validator.isNotNull(storeInformation.getZip()) && !isNumeric(storeInformation.getZip())) 
+				|| (Validator.isNotNull(storeInformation.getLatitude()) && !isNumeric(storeInformation.getLatitude()))
+				|| (Validator.isNotNull(storeInformation.getLongitude()) && !isNumeric(storeInformation.getLongitude()))){
+			
+			SessionErrors.add(request, "storeLocationNonStringException");
+			throw new StoreLocationNonStringException("Zip, Latitude & Longitude should not contain characters. Please fill proper data.");
+		
+		}
+		
+		if(storeInformation.getAddress1().length()>200 || storeInformation.getCity().length()>75 ||
+				storeInformation.getState().length()>75 || storeInformation.getCountry().length()>75 ||
+				storeInformation.getZip().length()>8 || storeInformation.getPhone().length()>15 ||
+				storeInformation.getLatitude().length()>50 || storeInformation.getLongitude().length()>50) {
+			SessionErrors.add(request, "storeLocationExcessFieldLimitSizeException");
+			throw new StoreLocationExcessFieldLimitSizeException("Field size is greater than required.");
+		}
+	}
+	
+	public static boolean isNumeric(String str){
+		
+		if(!str.matches("-?\\d*\\.?\\d+")) {
+			return false;
+		}
+		return true;
+	}
+
+	private Log _log = LogFactoryUtil.getLog(StoreLocationAddMVCActionCommand.class);
 }

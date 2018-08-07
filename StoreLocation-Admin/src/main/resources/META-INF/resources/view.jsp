@@ -1,6 +1,11 @@
 <%@page import="com.byteparity.store.location.admin.portlet.util.StoreSearchHelper"%>
 <%@ include file="/init.jsp" %>
 
+<liferay-ui:error key="storeInformationValidationError" message="store-empty-field-error-message" />
+<liferay-ui:error key="storeLocationNonStringException" message="store-non-string-exception-error-message" />
+<liferay-ui:error key="storeLocationExcessFieldLimitSizeException" message="store-limit-exceed-exception-error-message" />
+
+
 <liferay-portlet:renderURL varImpl="storeRecordSearchUrl">
 	<portlet:param name="mvcPath" value="/view.jsp" />
 </liferay-portlet:renderURL>

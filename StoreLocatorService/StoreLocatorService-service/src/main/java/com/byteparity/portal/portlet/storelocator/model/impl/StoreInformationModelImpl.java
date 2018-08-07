@@ -110,7 +110,7 @@ public class StoreInformationModelImpl extends BaseModelImpl<StoreInformation>
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table ByteParity_StoreInformation (uuid_ VARCHAR(75) null,storeId LONG not null primary key,storeName VARCHAR(75) null,address1 VARCHAR(75) null,address2 VARCHAR(75) null,city VARCHAR(75) null,state_ VARCHAR(75) null,country VARCHAR(75) null,zip VARCHAR(75) null,phone VARCHAR(75) null,latitude VARCHAR(75) null,longitude VARCHAR(75) null,groupId LONG,companyId LONG,createdBy LONG,createDate DATE null,modifiedDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table ByteParity_StoreInformation (uuid_ VARCHAR(75) null,storeId LONG not null primary key,storeName VARCHAR(200) null,address1 VARCHAR(75) null,address2 VARCHAR(75) null,city VARCHAR(75) null,state_ VARCHAR(75) null,country VARCHAR(75) null,zip VARCHAR(8) null,phone VARCHAR(15) null,latitude VARCHAR(50) null,longitude VARCHAR(50) null,groupId LONG,companyId LONG,createdBy LONG,createDate DATE null,modifiedDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table ByteParity_StoreInformation";
 	public static final String ORDER_BY_JPQL = " ORDER BY storeInformation.storeId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY ByteParity_StoreInformation.storeId ASC";

@@ -4,16 +4,34 @@
 	<model name="com.byteparity.portal.portlet.storelocator.model.StoreInformation">
 		<field name="uuid" type="String" />
 		<field name="storeId" type="long" />
-		<field name="storeName" type="String" />
-		<field name="address1" type="String" />
+		<field name="storeName" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="address1" type="String">
+			<hint name="max-length">75</hint>
+		</field>
 		<field name="address2" type="String" />
-		<field name="city" type="String" />
-		<field name="state" type="String" />
-		<field name="country" type="String" />
-		<field name="zip" type="String" />
-		<field name="phone" type="String" />
-		<field name="latitude" type="String" />
-		<field name="longitude" type="String" />
+		<field name="city" type="String">
+			<hint name="max-length">75</hint>
+		</field>
+		<field name="state" type="String">
+			<hint name="max-length">75</hint>
+		</field>
+		<field name="country" type="String">
+			<hint name="max-length">75</hint>
+		</field>
+		<field name="zip" type="String">
+			<hint name="max-length">8</hint>
+		</field>
+		<field name="phone" type="String">
+			<hint name="max-length">15</hint>
+		</field>
+		<field name="latitude" type="String">
+			<hint name="max-length">50</hint>
+		</field>
+		<field name="longitude" type="String">
+			<hint name="max-length">50</hint>
+		</field>
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="createdBy" type="long" />
