@@ -31,7 +31,7 @@ You should add Google API Key from the configuration of portlet. We have used Go
 
 ![ScreenShot](https://user-images.githubusercontent.com/24852574/43137101-7261bf26-8f68-11e8-8e2e-fbd8888d8fb1.PNG)
 
-![ScreenShot](https://user-images.githubusercontent.com/24852574/43137133-8c58ab10-8f68-11e8-97e1-2a08b8bcfd27.PNG)
+![ScreenShot](https://user-images.githubusercontent.com/24852574/44019347-162df294-9efc-11e8-8573-b3afb02451c3.PNG)
 
 After adding several stores you can see how it looks in view portlet for end-user.
    
@@ -51,7 +51,7 @@ We have used Google API to get the location of the stores in the map. For Enable
 
 ![ScreenShot](https://user-images.githubusercontent.com/24852574/43137383-64e52ad0-8f69-11e8-9838-71c5d9b58060.PNG)
 
-![ScreenShot](https://user-images.githubusercontent.com/24852574/43137430-8687f3d4-8f69-11e8-9e6d-15e85adf7b49.PNG)
+![ScreenShot](https://user-images.githubusercontent.com/24852574/44019421-5c4a4a3e-9efc-11e8-93ad-74272c07e1e1.PNG)
 
 With the help of GeoDistanceFilter class, we are able to search stores around the location of current user. We need to select distance unit either Mile or Kilometer and add the distance within which list of stores should appear. After that we will get the list of stores in the radius of current user's location. By default it will display all the stores.
 
