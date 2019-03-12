@@ -1,0 +1,100 @@
+#map {
+	height: 100%;
+}
+
+/* Optional: Makes the sample page fill the window. */
+html, body {
+	height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.view_store_search .form-group.input-select-wrapper, .view_store_search .form-group.input-text-wrapper {
+    width: 46%;
+    float:left;
+    padding: 0 20px;
+}
+
+.view_store_search div#addressInformation {
+    width: calc(45% - 20px);
+    padding: 0 10px;
+    float: left;
+    margin-left: 0;
+    margin-right: 5%;
+}
+.view_store_search div#addressInformation .col-md-6{
+	padding-bottom: 20px;
+}
+.view_store_search #map{
+	width: 48.5%;
+	height: 450px;
+}
+
+
+#addressInformation{
+	max-height: 457px;
+}
+
+.portlet-title-text{
+    display: none;
+}
+
+.form-group.input-text-wrapper {
+    width: 100%;
+    padding: 0;
+}
+.portlet-body .edit_store_locatore .form-group {
+    margin-bottom: 20px;
+    width: 49.8%;
+    display:inline-block;
+    vertical-align:top;
+    padding: 0 20px;
+}
+.portlet-body .edit_store_locatore .store_name_field, .portlet-body .edit_store_locatore .area_field, .portlet-body .edit_store_locatore .phone_number_field {
+    width: 100%;
+}
+.portlet-body .edit_store_locatore .area_field{
+	-webkit-box-shadow: 0px 0px 9px 5px rgba(158,158,158,1);
+	-moz-box-shadow: 0px 0px 9px 5px rgba(158,158,158,1);
+	box-shadow: 0px 0px 9px 5px rgba(158,158,158,1);
+}
+.portlet-body .edit_store_locatore .store_name_field label, .portlet-body .edit_store_locatore .area_field label, .portlet-body .edit_store_locatore .phone_number_field label {
+    width: 100%;
+}
+.portlet-body .edit_store_locatore .store_name_field .form-group.input-text-wrapper, .portlet-body .edit_store_locatore .area_field .form-group.input-text-wrapper, .portlet-body .edit_store_locatore .phone_number_field .form-group.input-text-wrapper {
+    width: 48%;
+}
+.portlet-body .edit_store_locatore .form-group:last-child{
+	padding: 0 5px;
+	width: 100%;
+	margin-top: 10px;
+}
+.portlet-body .edit_store_locatore .form-group.input-text-wrapper {
+    width: 100%;
+    padding: 0;
+}
+.portlet-body .edit_store_locatore .portlet_title_line{
+	text-align: left;
+    margin: 20px 0;
+    font-weight: bold;
+    padding-left: 45px;
+}
+
+.searchcontainer-content th{
+	font-weight: bold;
+}
+
+#toggle_id_store_searchadvancedContent,
+.taglib-search-toggle{
+	width: 30% !important;
+}
+
+.view_store_search .viewport .overview{
+	width: 100%;
+}
+.scrollable .viewport {
+    width: 100%;
+}
+.custBtn{
+	margin-top: 2.2%;
+}
