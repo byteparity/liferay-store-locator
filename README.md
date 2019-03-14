@@ -11,7 +11,7 @@ A common usecase: Photo studio association or company needs to show list of all 
 
 ## Environment
 
-* Liferay 7 - GA4 +, Liferay 7.1 - GA1 +
+* Liferay 7.0 + DXP, Liferay 7.0 CE-GA4 +, Liferay 7.1 CE-GA1 +
 *	MySQL 5.6 +
 *	Elastic Search
 
